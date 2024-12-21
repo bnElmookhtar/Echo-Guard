@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Roboto", Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f9;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            margin-top: 50px;
+            color: #4a90e2;
+            font-weight: 700;
+        }
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+            max-width: 400px;
+            width: 90%;
+            word-wrap: break-word;
+        }
+        p {
+            font-size: 16px;
+            color: #555;
+            line-height: 1.6;
+            margin: 10px 0;
+        }
+        p strong {
+            font-weight: bold;
+            color: #333;
+        }
+        .result-icon {
+            font-size: 50px;
+            margin-bottom: 10px;
+        }
+        .result-icon-real {
+            color: #4caf50; /* Green for "Real" */
+        }
+        .result-icon-fake {
+            color: #f44336; /* Red for "Fake" */
+        }
+        .highlight-real, .highlight-fake {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        .highlight-real {
+            color: #4caf50; /* Green for "Real" */
+        }
+        .highlight-fake {
+            color: #f44336; /* Red for "Fake" */
+        }
+        button {
+            background-color: #4a90e2;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #357ab8;
+            transform: scale(1.02);
+        }
+    </style>
+</head>
+<body>
+    <h1>Prediction Result</h1>
+    <div class="container">
+        <!-- Icon for Prediction -->
+        {% if label == "Real" %}
+            <div class="result-icon result-icon-real">✅</div>
+        {% elif label == "Fake" %}
+            <div class="result-icon result-icon-fake">❌</div>
+        {% endif %}
+
+        <!-- File Name -->
+        <p>File: <strong>{{ filename }}</strong></p>
+
+        <!-- Prediction Text -->
+        <p>
+            Prediction:
+            {% if label == "Real" %}
+                <span class="highlight-real">{{ label }}</span>
+            {% elif label == "Fake" %}
+                <span class="highlight-fake">{{ label }}</span>
+            {% endif %}
+        </p>
+
+        <!-- Confidence Percentage -->
+        <p>Confidence: <strong>{{ percentage | round(2) }}%</strong></p>
+
+        <!-- Button to Upload Another File -->
+        <form action="/" method="get">
+            <button type="submit">Upload Another File</button>
+        </form>
+    </div>
+</body>
+</html>
